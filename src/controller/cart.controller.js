@@ -1,11 +1,11 @@
-const { addToCartService } = require("../service/cart.service")
-
+const { addToCartService , calculateTotalAmountService } = require("../service/cart.service")
+const { StatusCodes } = require("http-status-codes")
 const addToCartController = async (req, res) => {
     const { userId, productId } = req.body;
     const result = await addToCartService(userId, productId)
-    if (result) {
+    console.log("result:", result)
         res.status(200).json({ message: "Product added to cart successfully" })
-    }
+    
 }
 
 module.exports = {

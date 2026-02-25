@@ -1,9 +1,10 @@
 const { createProductRepository, getProductByNameRepository, getAllProductsRepository, getProductRepository, updateProductRepository, deleteProductRepository } = require('../repository/product.repository')
+const { BadRequestError, NotFoundError } = require('../utils/app.error')
 
 const createProductService = async (product) => {
     const productExist = await getProductByNameRepository(product.name)
     if (productExist) {
-        return 'Product already exists'
+        throw new BadRequestError("Product already exists")
     }
     const newProduct = await createProductRepository(product)
     return newProduct
@@ -17,7 +18,7 @@ const getAllProductsService = async () => {
 const getProductService = async (id) => {
     const products = await getProductRepository(id)
     if (!products) {
-        return 'Product not found'
+        throw new NotFoundError("Product not found")
     }
     return products
 }
@@ -25,7 +26,7 @@ const getProductService = async (id) => {
 const updateProductService = async (id,product) =>{
     const productExist = await getProductRepository(id)
     if(!productExist) {
-        return "Product Doesn't Exist"
+        throw new BadRequestError ("Product Doesn't Exist")
     }
     const updatedProduct = await updateProductRepository(id,product)
     if (updatedProduct[0] === 1) return true
@@ -35,7 +36,7 @@ const updateProductService = async (id,product) =>{
 const deleteProductService = async (id) => {
     const product = await getProductRepository(id);
     if(!product){
-        return "Product not found";
+        throw new NotFoundError( "Product not found");
     }
     const deletedproduct = await deleteProductRepository(id);
     if (deletedproduct) return true
