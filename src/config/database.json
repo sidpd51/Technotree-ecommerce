@@ -1,10 +1,10 @@
 {
   "development": {
-    "username": "user",
-    "password": "password",
-    "database": "ecom_dev",
+    "username": "root",
+    "password": "Chiku@8117880142",
+    "database": "e_commerce",
     "host": "localhost",
-    "port": 3307,
+    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
