@@ -16,10 +16,15 @@ const updateCartItemQuantityRepository = async (cartItemId, updatedData) => {
     return await CartItem.update(updatedData, { where: { id: cartItemId } })
 }
 
+const deleteCartItemRepository = async (cartItemId) => {
+    return await CartItem.destroy({ where: { id: cartItemId } })
+}
+
 module.exports = {
     getCartItemRepository,
     createCartItemRepository,
     updateCartItemQuantityRepository,
-    getCartItemsRepository
+    getCartItemsRepository,
+    deleteCartItemRepository
 }
 

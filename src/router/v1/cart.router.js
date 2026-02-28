@@ -1,7 +1,8 @@
 const express = require("express")
 const cartRouter = express.Router()
-const { addToCartController } = require("../../controller/cart.controller")
+const { addToCartController, removeFromCartController } = require("../../controller/cart.controller")
 
-cartRouter.post('/', addToCartController)
+cartRouter.post('/add', addToCartController)
+cartRouter.post('/remove', removeFromCartController)
 
 module.exports = cartRouter

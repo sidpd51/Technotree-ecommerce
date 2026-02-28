@@ -3,10 +3,17 @@ const { StatusCodes } = require("http-status-codes");
 
 const addToCartController = async (req, res) => {
     const { userId, productId } = req.body;
-    const result = await addToCartService(userId, productId)
-    res.status(StatusCodes.OK).json({ message: "Product added to cart successfully", result })
+    const cartData = await addToCartService(userId, productId)
+    res.status(StatusCodes.OK).json({ message: "Product added to cart successfully", cartData })
+}
+
+const removeFromCartController = async (req, res) => {
+    const { userId, productId } = req.body;
+    const cartData = await removeFromCartService(userId, productId)
+    res.status(StatusCodes.OK).json({ message: "Product removed from cart successfully", cartData })
 }
 
 module.exports = {
-    addToCartController
+    addToCartController,
+    removeFromCartController
 }
